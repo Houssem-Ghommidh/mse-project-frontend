@@ -45,10 +45,13 @@ exports.resizeTacheImages = asyncHandler(async (req, res, next) => {
 // @access  Private
 exports.gettaches=asyncHandler(async(req,res) => {
     const tache = await Tachemodel.find({}) ;
-
     res.status(200).json({results:tache.length,data:tache})
   });
-
+  exports.getTacheByIdProject=asyncHandler(async(req,res) => {
+    const {id} = req.params;
+    const tache = await Tachemodel.find({id_projet:id}) ;
+    res.status(200).json({results:tache.length,data:tache})
+  });
 // @desc    Get specific tache by id
 // @route   GET api/tache/:id
 // @access  Private

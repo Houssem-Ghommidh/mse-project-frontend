@@ -16,7 +16,9 @@ const {getusers,
         changeuserpassword,
         passwordrecovery,
         resizeImage,
-        uploadUserImage
+        uploadUserImage,
+        getusersByProject,
+        getTechniciens
     }=require('../services/userService');
 
 
@@ -26,8 +28,11 @@ router.put('/changepassword/:id',changeuserpasswordvalidate,changeuserpassword);
 router.route('/').get(getusers)
                  .post(uploadUserImage,resizeImage,createuserValidator,createuser)
                  .put(forgetuserpasswordvalidate,passwordrecovery);
+router.route('/project/:id').get(getusersByProject)
+router.route('/techniciens/:id').get(getTechniciens)
 
-router.route('/:id').get(getuserValidator,getuser)
+
+router.route('/:id').get(getuser)
                     .put(updateuserValidator,updateuser)
                     .delete(deleteuserValidator,deleteuser);
 

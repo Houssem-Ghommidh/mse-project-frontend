@@ -2,14 +2,9 @@ const mongoose = require('mongoose');
 
 const rapportSchema = new mongoose.Schema(
   {
-   
-              
               Date: String ,
-              Technician_on_duty :  {
-                type: mongoose.Schema.ObjectId,
-                ref: 'user',
-                required: [true, 'rapport must be belong to user'],
-              }, 
+              Technician_on_duty :  String,
+              createdBy: String, 
               Location: String ,
               Engine : String ,
               Status : String ,

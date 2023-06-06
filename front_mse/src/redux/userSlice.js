@@ -73,9 +73,6 @@ export const fetchusers = createAsyncThunk(
             }
           }
                );
-
-
-
                export const editusers = createAsyncThunk(
                 'users/editusers',
                 async (todo, { rejectWithValue }) => {

@@ -34,7 +34,7 @@ const response= await	axios
 		});
 		console.log(response.data)
 
-    if(response.data.token && response.data.data.role ==='admin')
+    if(response.data.token)
 	{
 
 	  localStorage.setItem("image", response.data.data.image);
@@ -42,14 +42,16 @@ const response= await	axios
       localStorage.setItem("first_name", response.data.data.first_name);
       localStorage.setItem("last_name", response.data.data.last_name);
       localStorage.setItem("token", response.data.token);	
-	  localStorage.setItem("role", response.data.data.role);	
+	  localStorage.setItem("role", response.data.data.role);
+	  localStorage.setItem("id_project", response.data.data.projetid);	
+
     Swal.fire(
       'Success',
      "welcome",
       'success'
     )
 
-	navigate("/admin/dashboard");
+	navigate("/admin");
 
       
 		}

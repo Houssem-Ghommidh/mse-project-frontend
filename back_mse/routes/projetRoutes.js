@@ -4,7 +4,7 @@ const {createprojetValidator,deleteprojetValidator,getprojetValidator,updateproj
 
 
 const {createprojet,deleteprojet,getprojet,getprojets,updateprojet
-        ,createFilterObj
+        ,createFilterObj,affectTechniciensToProject
     }=require('../services/projetService');
 
 
@@ -15,7 +15,7 @@ const router=express.Router({mergeParams: true});
 
 router.route('/').get(createFilterObj,getprojets)
                  .post(createprojetValidator,createprojet);
-
+router.route('/affect').patch(affectTechniciensToProject);
 router.route('/:id').get(getprojetValidator,getprojet)
                     .put(updateprojetValidator,updateprojet)
                     .delete(deleteprojetValidator,deleteprojet);

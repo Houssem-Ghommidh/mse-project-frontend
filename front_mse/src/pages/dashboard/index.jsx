@@ -64,7 +64,7 @@ const Dashboard = () => {
             alignItems="center"
             justifyContent="center"
           >
-            <StatBox
+            {localStorage.getItem("role")=="admin" && <StatBox
               title="12,361"
               subtitle="Emails Sent"
               progress="0.75"
@@ -74,7 +74,7 @@ const Dashboard = () => {
                   sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
                 />
               }
-            />
+            />}
           </Box>
         </Grid>
         <Grid xs={12} sm={12} md={6} lg={3} xl={3}>

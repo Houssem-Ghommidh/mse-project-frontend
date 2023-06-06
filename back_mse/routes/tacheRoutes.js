@@ -14,16 +14,18 @@ const {gettaches,
         deletetache,
        createFilterObj,
        resizeTacheImages,
-       uploadTacheImages
+       uploadTacheImages,
+       getTacheByIdProject
     }=require('../services/tacheService');
 
 
 const router=express.Router();
 
 router.route('/').get(gettaches)
-                 .post(uploadTacheImages,resizeTacheImages,createtacheValidator,createtache)
+                 .post(createtache)
+router.route('/project/:id').get(getTacheByIdProject)
 
-router.route('/:id').get(gettacheValidator,gettache)
+router.route('/one/:id').get(gettacheValidator,gettache)
                     .put(updatetacheValidator,updatetache)
                     .delete(deletetacheValidator,deletetache);
 

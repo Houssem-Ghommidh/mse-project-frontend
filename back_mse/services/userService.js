@@ -31,6 +31,17 @@ exports.getusers=asyncHandler(async(req,res) => {
     res.status(200).json({results:users.length,page,data:users})
   });
 
+  exports.getusersByProject=asyncHandler(async(req,res) => {
+    const {id} = req.params;
+    const users = await usermodel.find({projetid:id,role:"technicien"});
+    res.status(200).json(users)
+  });
+
+  exports.getTechniciens=asyncHandler(async(req,res) => {
+    const {id} = req.params;
+    const users = await usermodel.find({role:"technicien",projetid:null});
+    res.status(200).json(users)
+  });
 // @desc    Get specific user by d
 // @route   GET api/users/:id
 // @access  Private

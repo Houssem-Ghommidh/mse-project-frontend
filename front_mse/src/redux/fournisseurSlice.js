@@ -7,7 +7,7 @@ export const fetchfournisseur = createAsyncThunk(
       const {rejectWithValue} = thunkAPI;
         try{
           const res =await fetch(`${process.env.REACT_APP_BASE_URL}/api/fournisseur`)
-      const data = await res.json()
+          const data = await res.json()
       
       return data.data}
       catch(error){

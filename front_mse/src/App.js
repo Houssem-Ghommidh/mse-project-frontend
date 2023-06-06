@@ -10,6 +10,7 @@ import Team from "./pages/team";
 import Invoices from "./pages/invoices";
 import Contacts from "./pages/contacts";
 import Form from "./pages/form";
+
 import Calendar from "./pages/calendar";
 import Bar from "./pages/bar";
 import Line from "./pages/line";
@@ -30,6 +31,12 @@ import FormUser from "./pages/user/FormUser";
 import ListUsers from "./pages/user/ListUser";
 import Formulaire from "./pages/Formulaire/Formulaire";
 import FormProjet from "./pages/Projet/FormProjet";
+import Profile from "./pages/Profile/profile";
+import ListProjet from "./pages/Projet/ListProjet";
+import ListRapport from "./pages/Formulaire/ListRapport";
+import TaskInterface from "./pages/tache/TaskInterface";
+import DetailsProjet from "./pages/DetailsProjet/DetailsProjet";
+import PdfTest from "./pages/pdfViewer";
 function LinkAdmin() {
   const [theme, colorMode] = useMode();
   return (
@@ -41,15 +48,20 @@ function LinkAdmin() {
           <main>
             <Topbar />
             <Routes>
-                <Route path="/" element={<Dashboard />} />
+                <Route path="/" element={<Profile />} />
                 
                  <Route path="/dashboard" element={<Dashboard/>} />
                 <Route path="/team" element={<Team />} />
+                <Route path="/DetailsProjet/:id" element={<DetailsProjet />} />
+
           
 
                 <Route path="/formfournisseur" element={<FormFournisseur />} />
                 <Route path="/listfourniseur" element={<ListFournisseur />} />
                 <Route path="/formfournisseur/:id" element={<EditFournisseur />} />
+
+                <Route path="/tache" element={<TaskInterface />} />
+
 
                 <Route path="/formproduit" element={<FormProduit />} />
                 <Route path="/listproduit" element={<ListProduit />} />
@@ -60,11 +72,11 @@ function LinkAdmin() {
                 <Route path="/formuser/:id" element={<EditFournisseur />} />
 
                 <Route path="/formformulaire" element={<Formulaire />} />
-                <Route path="/listformulaire" element={<ListUsers />} />
+                <Route path="/listformulaire" element={<ListRapport />} />
                 <Route path="/formformulaire/:id" element={<EditFournisseur />} />
 
                 <Route path="/formprojet" element={<FormProjet />} />
-                <Route path="/listprojet" element={<ListUsers />} />
+                <Route path="/listprojet" element={<ListProjet />} />
                 <Route path="/formprojet/:id" element={<EditFournisseur />} />
 
               
@@ -107,7 +119,7 @@ const App = () => {
           <Routes>
 
 <Route path="/login" element={<Login/>}/>
-<Route path="/" element={<Login/>}/>
+<Route path="/" element={<PdfTest/>}/>
 <Route path="/admin/*" element={<Protected><LinkAdmin /></Protected>} />
 <Route path="/technicien/*" element={ <LinkRE />} />
 </Routes>

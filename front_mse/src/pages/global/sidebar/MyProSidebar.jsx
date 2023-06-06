@@ -6,7 +6,9 @@ import { useSidebarContext } from "./sidebarContext";
 import { Link } from "react-router-dom";
 import { tokens } from "../../../theme";
 import { useTheme, Box, Typography, IconButton } from "@mui/material";
+import FolderSharedIcon from '@mui/icons-material/FolderShared';
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import AddTaskIcon from '@mui/icons-material/AddTask';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
@@ -158,22 +160,21 @@ const MyProSidebar = () => {
               </Box>
             </Box>
           )}
-          <Box paddingLeft={collapsed ? undefined : "10%"}>
-            <Item
+           <Box paddingLeft={collapsed ? undefined : "10%"}>
+           {localStorage.getItem("role") == "admin" && <Item
               title="Dashboard"
               to="/admin/"
               icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
+            /> }
                         <Typography
               variant="h6"
               color={colors.grey[300]}
               sx={{ m: "15px 20px 5px 20px" }}
             >
-              Data
             </Typography>
-            <SubMenu  icon={<EngineeringIcon />}  label="Fournisseur">
+            {localStorage.getItem("role") == "admin" && <SubMenu  icon={<EngineeringIcon />}  label="Fournisseur">
             <Item
               title="Ajouter fournisseur"
               to="/admin/formfournisseur"
@@ -188,15 +189,15 @@ const MyProSidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-            </SubMenu>
+            </SubMenu>}
             <SubMenu  icon={<Inventory2Icon />}  label="Product">
-            <Item
+            {localStorage.getItem("role") == "admin" &&<Item
               title="Ajouter Product"
               to="/admin/formproduit"
               icon={<AddCircleIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
+            />}
               <Item
               title="List Product"
               to="/admin/listproduit"
@@ -206,7 +207,7 @@ const MyProSidebar = () => {
             />
             </SubMenu>
 
-            <SubMenu  icon={<ManageAccountsIcon />}  label="Gestion des comptes">
+            {localStorage.getItem("role") == "admin" && <SubMenu  icon={<ManageAccountsIcon />}  label="Gestion des comptes">
             <Item
               title="Ajouter Users"
               to="/admin/formuser"
@@ -221,7 +222,7 @@ const MyProSidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-            </SubMenu>
+            </SubMenu>}
              
             <SubMenu  icon={<InsertDriveFileIcon />}  label="Formulaire">
             <Item
@@ -239,7 +240,7 @@ const MyProSidebar = () => {
               setSelected={setSelected}
             />
             </SubMenu>
-            <SubMenu  icon={<InsertDriveFileIcon />}  label="Projet">
+            <SubMenu  icon={<FolderSharedIcon />}  label="Projet">
             <Item
               title="Ajouter Projet"
               to="/admin/formprojet"
@@ -251,6 +252,13 @@ const MyProSidebar = () => {
               title="List Projet"
               to="/admin/listprojet"
               icon={<FormatListBulletedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Taches"
+              to="/admin/tache"
+              icon={<AddTaskIcon />}
               selected={selected}
               setSelected={setSelected}
             />

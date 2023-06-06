@@ -1,4 +1,5 @@
 const Projetmodel=require('../models/projetModel')
+const usermodel = require('../models/userModel')
 const asyncHandler = require('express-async-handler')
 const ApiError=require('../utils/apiError')
 
@@ -11,6 +12,27 @@ exports.getprojets=asyncHandler(async(req,res) => {
 
     res.status(200).json({results:projet.length,data:projet})
   });
+
+  exports.affectTechniciensToProject=asyncHandler(async(req,res) => {
+    const listTechniciens = req.body.techniciens;
+    listTechniciens.forEach(technicien => {
+      if(req.body.projectId != null){
+      affecterUnTechnicienAUnProjet(technicien,req.body.projectId);}
+      else{
+        affecterUnTechnicienAUnProjet(technicien,null);
+      }
+    });
+    res.status(200).json("Reussi");
+  });
+
+  const affecterUnTechnicienAUnProjet = (async(technicien,projectId) => {
+    const filter = { "email": technicien.email };
+    const update = { "projetid": projectId };
+    const user = await usermodel.findOneAndUpdate(filter,update);
+    user.projetid = projectId;
+    user.save();
+  });
+
 
 // @desc    Get specific projet by id
 // @route   GET api/projet/:id

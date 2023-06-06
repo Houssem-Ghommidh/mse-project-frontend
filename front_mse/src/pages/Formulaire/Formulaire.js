@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
   Box,
   Button,
@@ -15,11 +15,31 @@ import Header from "../../components/Header";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import RapportService from "../../service/RapportService";
 
 const Formulaire = () => {
+  const [dateValue, setDateValue] = useState("");
   const isNonMobile = useMediaQuery("(min-width:600px)");
-  const handleFormSubmit = (values) => {
-    console.log(values);
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    const formData = {};
+  const elements = e.target.elements;
+
+  for (let i = 0; i < elements.length; i++) {
+    const element = elements[i];
+    if (element.name) {
+      formData[element.name] = element.value;
+      formData["Date"] = dateValue;
+      formData["id"] = "1"
+      formData["id_projet"] = "647a39643625227f3a32ab66"
+      formData["createdBy"] = localStorage.getItem("first_name")+" "+localStorage.getItem("last_name");
+    }
+  }
+  // Access the form data as a JSON object
+  console.log(formData);
+  RapportService.createRapport(formData);
+    console.log("submit form");
+
   };
   const initialValues = {
     firstName: "",
@@ -29,6 +49,17 @@ const Formulaire = () => {
     address1: "",
     address2: "",
   };
+  const handleChangeDate =(e) => {
+    console.log(e)
+    var mois = "";
+    
+    if (parseInt(e.$M,10) < 10){
+      mois = "0"+e.$M;
+    }
+   var date = e.$y+"-"+mois +"-"+e.$D;
+    setDateValue(date);
+    console.log(dateValue);
+  }
   const checkoutSchema = yup.object().shape({
     firstName: yup.string().required("Required"),
     lastName: yup.string().required("Required"),
@@ -39,7 +70,7 @@ const Formulaire = () => {
 
   return (
     <Box m="20px">
-      <Header title="CREATE USER" subtitle="Create a New User Profile" />
+      <Header title="CREATE FORM" subtitle="Create a New Form" />
 
       <Formik
         onSubmit={handleFormSubmit}
@@ -54,7 +85,7 @@ const Formulaire = () => {
           handleChange,
           handleSubmit,
         }) => (
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleFormSubmit}>
             <Box
               display="grid"
               gap="30px"
@@ -70,6 +101,8 @@ const Formulaire = () => {
                       variant="filled"
                       sx={{ width: "100%" }}
                       label="Date"
+                      name="Date"
+                      onChange={(e) => handleChangeDate(e)}
                     />
                   </DemoContainer>
                 </LocalizationProvider>
@@ -82,7 +115,6 @@ const Formulaire = () => {
                 label="Technician on duty"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.Technician_on_duty}
                 name="Technician_on_duty"
                 error={
                   !!touched.Technician_on_duty && !!errors.Technician_on_duty
@@ -192,7 +224,7 @@ const Formulaire = () => {
                 label="Last PM Hours"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.Last_PM_Hours}
+                
                 name="Last_PM_Hours"
                 error={!!touched.Last_PM_Hours && !!errors.Last_PM_Hours}
                 helpertext={touched.Last_PM_Hours && errors.Last_PM_Hours}
@@ -205,7 +237,6 @@ const Formulaire = () => {
                 label="Running Hours"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.firstName}
                 name="Running_Hours"
                 error={!!touched.Running_Hours && !!errors.Running_Hours}
                 helpertext={touched.Running_Hours && errors.Running_Hours}
@@ -218,7 +249,6 @@ const Formulaire = () => {
                 label="Electric Power P"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.firstName}
                 name="Electric_Power_P"
                 error={!!touched.Electric_Power_P && !!errors.Electric_Power_P}
                 helpertext={touched.Electric_Power_P && errors.Electric_Power_P}
@@ -233,7 +263,7 @@ const Formulaire = () => {
                   onChange={(event) => {}}
                   label="Apparent Power S"
                   variant="filled"
-                  name="role"
+                  name="Apparent_Power_S" //hethi kenet name="role"
                   error={
                     !!touched.Apparent_Power_S && !!errors.Apparent_Power_S
                   }
@@ -764,7 +794,7 @@ const Formulaire = () => {
                 label="Failures and Observations"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.firstName}
+                
                 name="Failures_and_Observations"
                 error={
                   !!touched.Failures_and_Observations &&
@@ -783,7 +813,7 @@ const Formulaire = () => {
                 label="Intervention"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.firstName}
+                
                 name="Intervention"
                 error={!!touched.Intervention && !!errors.Intervention}
                 helpertext={touched.Intervention && errors.Intervention}
@@ -792,7 +822,7 @@ const Formulaire = () => {
             </Box>
             <Box display="flex" justifyContent="end" mt="20px">
               <Button type="submit" color="secondary" variant="contained">
-                Create New User
+                Create New Form
               </Button>
             </Box>
           </form>

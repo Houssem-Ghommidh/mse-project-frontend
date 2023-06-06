@@ -33,10 +33,7 @@ const Topbar = () => {
           p={0.2}
           borderRadius={1}
         >
-          <InputBase sx={{ ml: 1, flex: 1 }} placeholder="Search" />
-          <IconButton type="button">
-            <SearchIcon />
-          </IconButton>
+
         </Box>
       </Box>
       <Box display="flex">

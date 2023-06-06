@@ -81,7 +81,7 @@ dispatch(fetchfournisseur())
 
     return (
         <Box m="20px">
-          <Header title="CREATE PRODUCT" subtitle="Create a New produit" />
+          <Header title="CREATE PRODUCT" subtitle="Create a New PRODUCT" />
     
           <Formik onSubmit={handleFormSubmit}  initialValues={initialValues} validationSchema={checkoutSchema}>
             {({ values, errors, touched, handleBlur, handleChange, handleSubmit,setFieldValue}) => (

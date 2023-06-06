@@ -2,7 +2,12 @@ const mongoose = require('mongoose');
 
 const tacheSchema = new mongoose.Schema(
   {
+
     nom_tache: {
+      type: String,
+      required: true,
+    },
+    num_tache: {
       type: String,
       required: true,
     },
@@ -14,9 +19,7 @@ const tacheSchema = new mongoose.Schema(
         type: Date,
         required: true,
       },
- 
-    
-    images: [String],
+    duration:String,
     id_projet: {
       type: mongoose.Schema.ObjectId,
       ref: 'projet',
